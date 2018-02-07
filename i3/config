@@ -133,7 +133,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 #退出动作
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '干啥？' -b '锁屏' 'lock&' -b '退出' 'i3-msg exit' -b '休眠' 'lock&&sudo pm-hibernate' -b '关机' 'sudo shutdown -h now' -b '重启' 'sudo reboot'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '干啥？' -b '退出' 'i3-msg exit' -b '休眠' 'sudo pm-hibernate' -b '关机' 'sudo shutdown -h now' -b '重启' 'sudo reboot'"
 
 bindsym mod1+l exec lock
 
