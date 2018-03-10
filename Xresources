@@ -1,0 +1,44 @@
+##### THIS FILE IS BEING CURRENTLY MANAGED BY URXVTCONFIG #####
+##### CHANGES DONE TO THIS FILE MANUALLY MAY AFFECT THE FUNCTIONALITY ######
+##### PROCEED WITH CAUTION! #####
+
+urxvt.foreground: 	#E8DFD6
+urxvt.background: 	#1d1d1d
+urxvt.cursorColor:  #2E3340
+urxvt.color0:       #032C36
+urxvt.color8:       #065F73
+urxvt.color1:       #C2454E
+urxvt.color9:       #EF5847
+urxvt.color2:       #7CBF9E
+urxvt.color10:      #A2D9B1
+urxvt.color3:       #8A7A63
+urxvt.color11:      #BEB090
+urxvt.color4:       #2E3340
+urxvt.color12:      #61778D
+urxvt.color5:       #FF5879
+urxvt.color13:      #FF99A1
+urxvt.color6:       #44B5B1
+urxvt.color14:      #9ED9D8
+urxvt.color7:       #F2F1B9
+urxvt.color15:      #F6F6C9
+
+URxvt*scrollBar:         false
+URxvt*scrollBar_right:   false
+
+URxvt*font: -misc-fixed-medium-r-semicondensed-*-12-90-100-*-c-60-iso8859-1
+URxvt.font: xft:Ubuntu Mono:pixelsize=15,xft:Font Awesome:pixelsize=15
+URxvt.letterSpace: -1
+
+*antialias:  false
+*autohint:   false
+
+Xcursor.theme: Adwaita
+
+!-*- Perl extensions -*-
+URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
+URxvt.keysym.M-u:     perl:url-select:select_next
+URxvt.url-launcher:   /usr/bin/chromium
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1
+URxvt.keysym.M-Escape:perl:keyboard-select:activate
+URxvt.keysym.Control-Shift-V:     perl:pasta:paste
