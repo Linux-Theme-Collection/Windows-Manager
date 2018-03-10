@@ -1,11 +1,12 @@
 ## i3wm
 
+### 请务必查看配置文件并注意注释
+
 ### 必要组件：
 
 * i3blocks
 * i3lock-color
-* i3lock-fancy
-* termite
+* termite or gnome-terminal
 
 ### 推荐软件：
 
