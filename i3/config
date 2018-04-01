@@ -9,12 +9,12 @@ client.urgent                 	#cd989a #cd989a #2e3436
 
 client.background		#1d1d1d
 hide_edge_borders smart
-new_window pixel 4
-new_float pixel 4
+default_border  pixel 4
+default_floating_border pixel 4
 
 # Gapps 如果不是i3-gaps可以放心的删除
-smart_gaps on
-smart_borders on
+#smart_gaps on
+#smart_borders on
 
 # 具体配置说明请看 https://i3wm.org/docs/userguide.html
 
@@ -22,13 +22,13 @@ smart_borders on
 set $mod Mod4
 
 # 全局字体
-font pango:Noto Sans 12
+font pango:Ubuntu Mono Bold 12
 
 # 使用Mod键+鼠标拖拽悬浮窗口
 floating_modifier $mod
 
-# 打开一个终端，不要问我为啥用gnome-terminal这货。。。（推荐termite）
-bindsym $mod+Return exec gnome-terminal
+# 打开终端（推荐termite）
+bindsym $mod+Return exec termite
 
 # 杀死当前窗口
 bindsym $mod+Shift+q kill
@@ -86,29 +86,42 @@ bindsym $mod+a focus parent
 # 集中子窗口
 #bindsym $mod+d focus child
 
+#工作区名称
+
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws0 0
+
 #切换工作区
-bindsym $mod+1 workspace 1 Terminal
-bindsym $mod+2 workspace 2 Chromium
-bindsym $mod+3 workspace 3 Code
-bindsym $mod+4 workspace 4 Chat
-bindsym $mod+5 workspace 5 File
-bindsym $mod+6 workspace 6 Media
-bindsym $mod+7 workspace 7 Download
-bindsym $mod+8 workspace 8 Game
-bindsym $mod+9 workspace 9 Trash
-bindsym $mod+0 workspace 0 Main
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
 
 #移动工作区
-bindsym $mod+Shift+1 move container to workspace 1 Terminal
-bindsym $mod+Shift+2 move container to workspace 2 Chromium
-bindsym $mod+Shift+3 move container to workspace 3 Code
-bindsym $mod+Shift+4 move container to workspace 4 Chat
-bindsym $mod+Shift+5 move container to workspace 5 File
-bindsym $mod+Shift+6 move container to workspace 6 Media
-bindsym $mod+Shift+7 move container to workspace 7 Download
-bindsym $mod+Shift+8 move container to workspace 8 Game
-bindsym $mod+Shift+9 move container to workspace 9 Trash
-bindsym $mod+Shift+0 move container to workspace 0 Main
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
 
 #重载配置
 bindsym $mod+Shift+c reload
@@ -116,7 +129,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 #退出动作
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '干啥？' -b '锁屏' 'dm-tool lock' -b '退出' 'i3-msg exit' -b '休眠' 'sudo pm-hibernate' -b '关机' 'sudo shutdown -h now' -b '重启' 'sudo reboot'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'What do you want to do' -b 'Lock' 'dm-tool lock' -b 'Exit' 'i3-msg exit' -b 'Hibernate' 'sudo pm-hibernate' -b 'Shutdown' 'sudo shutdown -h now' -b 'Reboot' 'sudo reboot'"
 
 bindsym mod1+l exec lock
 
@@ -134,7 +147,8 @@ bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 10
 
 #截图
-bindsym 0xff61 exec scrot ~/Pictures/Screenshot/%Y_%m_%d_%H_%M_%S.png
+#bindsym Print exec scrot ~/Pictures/Screenshot/%Y_%m_%d_%H_%M_%S.png
+bindsym Print exec flameshot gui
 
 #调整窗口大小
 mode "resize" {
@@ -165,15 +179,15 @@ bar {
 #	想让bar透明可以去掉下面一行的注释，不过托盘可能显示不完美
 #	i3bar_command i3bar -t
 #	status_command i3status
-	font pango:Noto Sans 12
+	font pango:Noto Mono 11
 	strip_workspace_numbers yes
 	separator_symbol "//"
 #	非i3-gaps请删除下面这一行
-	height 24 
+#	height 28
 	colors {
 #		想让bar变透明还需要去掉下面一行的注释并注释它下面的一行
 #		background  #1d2021A0
-		background  #282828
+		background  #212121
         	statusline  #DDDDDD
         	separator   #7addda
         	focused_workspace   #2B83A6 #2B83A6 #DDDDDD
@@ -184,14 +198,17 @@ bar {
 }
 
 #指定工作区，通过xprop命令查看名称
-assign [class="Chromium"] 2 Chromium
-assign [class="Code"] 3 Code
-assign [class="Telegram"] 4 Chat
-assign [class="Evolution"] 4 Chat
-assign [class="Pcmanfm"] 5 File
-#assign [class=""] 6 Media
-assign [class="Steam"] 8 Game
-assign [class="qBittorrent"] 7 Download
+assign [class="Chromium"] $ws2
+assign [class="Geany"] $ws3
+assign [class="Telegram"] $ws4
+assign [class="Telegreat"] $ws4
+assign [class="Evolution"] $ws4
+assign [class="Pcmanfm"] $ws5
+#assign [class=""] $ws6
+assign [class="qBittorrent"] $ws7
+assign [class="Nextcloud"] $ws7
+assign [class="Steam"] $ws8
+assign [class="Remmina"] $ws9
 
 # 指定程序默认悬浮窗口
 #for_window [class="Termite"] floating enable, resize set 700 600, move position center
@@ -203,15 +220,21 @@ exec --no-startup-id compton -cb
 exec --no-startup-id xautolock -time 10 -locker "lock"
 exec --no-startup-id sudo chmod 666 /sys/class/leds/asus\:\:kbd_backlight/brightness
 
-exec --no-startup-id gnome-terminal
-exec --no-startup-id gnome-terminal
+#exec --no-startup-id  oneko -tora -speed 20
+
+exec --no-startup-id termite
+exec --no-startup-id termite
 exec --no-startup-id chromium
-exec --no-startup-id visual-studio-code
-exec --no-startup-id telegram-desktop
+exec --no-startup-id geany
+exec --no-startup-id /opt/Telegreat/Telegreat
+#exec --no-startup-id telegram-desktop
 #exec --no-startup-id evolution
-exec --no-startup-id sleep 3&&i3-msg "workspace 4 Chat; exec gnome-terminal -e weechat; workspace 1 Terminal"
+exec --no-startup-id sleep 3&&i3-msg "workspace $ws4; exec termite -e weechat; workspace $ws1"
 exec --no-startup-id pcmanfm
 exec --no-startup-id pcmanfm
-exec --no-startup-id i3-msg "workspace 6 Media; exec gnome-terminal -e cmus; workspace 1 Terminal"
+exec --no-startup-id i3-msg "workspace $ws6; exec termite -e ncmpcpp; workspace $ws1"
 exec --no-startup-id steam -silent
 exec --no-startup-id qbittorrent
+exec --no-startup-id nextcloud
+exec --no-startup-id remmina
+exec --no-startup-id flameshot
