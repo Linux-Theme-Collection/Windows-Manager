@@ -8,6 +8,10 @@
 * i3lock-color
 * termite or gnome-terminal
 
+##### 字体包
+* ttf-ubuntu-font-family 
+* ttf-font-awesome 
+
 ### 推荐软件：
 
 * Fcitx
