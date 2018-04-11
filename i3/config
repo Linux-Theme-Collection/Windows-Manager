@@ -131,7 +131,9 @@ bindsym $mod+Shift+r restart
 #退出动作
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'What do you want to do' -b 'Lock' 'dm-tool lock' -b 'Exit' 'i3-msg exit' -b 'Hibernate' 'sudo pm-hibernate' -b 'Shutdown' 'sudo shutdown -h now' -b 'Reboot' 'sudo reboot'"
 
-bindsym mod1+l exec lock
+# 注mod1 是 左 Alt 键
+#bindsym mod1+l exec lock
+bindsym mod1+l exec ~/.config/i3/lock
 
 #音量
 bindsym XF86AudioRaiseVolume exec "amixer -c 1 sset 'Master' 5%+"
