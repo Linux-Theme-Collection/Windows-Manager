@@ -2,19 +2,19 @@
 
 
 # 窗口颜色
-client.focused               	#121212 #101010 #9e8a8e
-client.focused_inactive 	#101010 #191919 #999999
-client.unfocused           	#101010 #191919 #999999
-client.urgent                 	#cd989a #cd989a #2e3436
+client.focused              #282c34     #abb2bf     #e06c75     #abb2bf
+client.focused_inactive     #282c34     #5c6370     #5c6370     #abb2bf
+client.unfocused            #282c34     #282c34     #5c6370     #abb2bf
+client.urgent               #be5046     #be5046     #282c34     #abb2bf
 
-client.background		#1d1d1d
-hide_edge_borders smart
+client.background           #282c34
+hide_edge_borders true
 default_border  pixel 4
 default_floating_border pixel 4
 
 # Gapps 如果不是i3-gaps可以放心的删除
-#smart_gaps on
-#smart_borders on
+smart_gaps on
+smart_borders on
 
 # 具体配置说明请看 https://i3wm.org/docs/userguide.html
 
@@ -23,6 +23,7 @@ set $mod Mod4
 
 # 全局字体
 font pango:Ubuntu Mono Bold 12
+# font pango:Noto Sans CJK SC 12
 
 # 使用Mod键+鼠标拖拽悬浮窗口
 floating_modifier $mod
@@ -88,16 +89,16 @@ bindsym $mod+a focus parent
 
 #工作区名称
 
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws0 0
+set $ws1 1 Terminal
+set $ws2 2 Chromium
+set $ws3 3 Code
+set $ws4 4 Chat
+set $ws5 5 File
+set $ws6 6 Media
+set $ws7 7 Download
+set $ws8 8 Game
+set $ws9 9 Trash
+set $ws0 0 Home
 
 #切换工作区
 bindsym $mod+1 workspace $ws1
@@ -129,7 +130,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 #退出动作
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'What do you want to do' -b 'Lock' 'dm-tool lock' -b 'Exit' 'i3-msg exit' -b 'Hibernate' 'sudo pm-hibernate' -b 'Shutdown' 'sudo shutdown -h now' -b 'Reboot' 'sudo reboot'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '收摊啦？' -b '退出' 'i3-msg exit' -b '休眠' 'sudo pm-hibernate' -b '关机' 'sudo shutdown -h now' -b '重启' 'sudo reboot'"
 
 bindsym mod1+l exec lock
 
@@ -139,8 +140,8 @@ bindsym XF86AudioLowerVolume exec "amixer -c 1 sset 'Master' 5%-"
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 #键盘背光
-bindsym XF86KbdBrightnessDown exec "sudo echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"
-bindsym XF86KbdBrightnessUp exec "sudo echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"
+#bindsym XF86KbdBrightnessDown exec "sudo echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"
+#bindsym XF86KbdBrightnessUp exec "sudo echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"
 
 #屏幕亮度
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5
@@ -175,25 +176,26 @@ bindsym $mod+r mode "resize"
 #状态栏
 bar {
 	position bottom
+#	position top
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
 #	想让bar透明可以去掉下面一行的注释，不过托盘可能显示不完美
 #	i3bar_command i3bar -t
 #	status_command i3status
-	font pango:Noto Mono 11
+	font pango:Ubuntu Mono Bold 12
 	strip_workspace_numbers yes
-	separator_symbol "//"
+	separator_symbol "/"
 #	非i3-gaps请删除下面这一行
-#	height 28
+	height 28
 	colors {
 #		想让bar变透明还需要去掉下面一行的注释并注释它下面的一行
 #		background  #1d2021A0
-		background  #212121
-        	statusline  #DDDDDD
-        	separator   #7addda
-        	focused_workspace   #2B83A6 #2B83A6 #DDDDDD
-        	active_workspace    #212121 #212121 #DDDDDD
-        	inactive_workspace  #212121 #212121 #DDDDDD
-		urgent_workspace #D64E4E #D64E4E #DDDDDD
+		background  #282c34
+		statusline  #CFD8DC
+        	separator   #3b84c0
+        	focused_workspace   #3b84c0 #3b84c0 #abb2bf
+        	active_workspace    #282c34 #282c34 #abb2bf
+        	inactive_workspace  #282c34 #282c34 #CFD8DC
+		urgent_workspace #be5046 #be5046 #abb2bf
         }
 }
 
@@ -206,6 +208,7 @@ assign [class="Evolution"] $ws4
 assign [class="Pcmanfm"] $ws5
 #assign [class=""] $ws6
 assign [class="qBittorrent"] $ws7
+assign [class="Deluge"] $ws7
 assign [class="Nextcloud"] $ws7
 assign [class="Steam"] $ws8
 assign [class="Remmina"] $ws9
@@ -214,20 +217,21 @@ assign [class="Remmina"] $ws9
 #for_window [class="Termite"] floating enable, resize set 700 600, move position center
 
 # 自启
+exec --no-startup-id compton -b
 exec --no-startup-id fcitx
-exec --no-startup-id compton -cb
-#exec --no-startup-id feh -Z --bg-scale /home/mame/Pictures/Backgrounds/Mame/blade.jpg
-exec --no-startup-id xautolock -time 10 -locker "lock"
-exec --no-startup-id sudo chmod 666 /sys/class/leds/asus\:\:kbd_backlight/brightness
+exec --no-startup-id albert
+exec --no-startup-id feh -Z --bg-fill /home/mame/Pictures/Backgrounds/Mame/blade.jpg
+exec --no-startup-id xautolock -time 5 -locker "lock"
+#exec --no-startup-id sudo chmod 666 /sys/class/leds/asus\:\:kbd_backlight/brightness
 
 #exec --no-startup-id  oneko -tora -speed 20
 
 exec --no-startup-id termite
 exec --no-startup-id termite
 exec --no-startup-id chromium
-exec --no-startup-id geany
-exec --no-startup-id /opt/Telegreat/Telegreat
-#exec --no-startup-id telegram-desktop
+#exec --no-startup-id geany
+#exec --no-startup-id /opt/Telegreat/Telegreat
+exec --no-startup-id Telegram
 #exec --no-startup-id evolution
 exec --no-startup-id sleep 3&&i3-msg "workspace $ws4; exec termite -e weechat; workspace $ws1"
 exec --no-startup-id pcmanfm
@@ -235,6 +239,9 @@ exec --no-startup-id pcmanfm
 exec --no-startup-id i3-msg "workspace $ws6; exec termite -e ncmpcpp; workspace $ws1"
 exec --no-startup-id steam -silent
 exec --no-startup-id qbittorrent
+exec --no-startup-id deluge
 exec --no-startup-id nextcloud
 exec --no-startup-id remmina
 exec --no-startup-id flameshot
+
+# vim:filetype=i3
