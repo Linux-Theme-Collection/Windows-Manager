@@ -1,0 +1,43 @@
+[options]
+font = Noto Sans Mono Medium 10
+allow_bold = true
+
+browser = xdg-open
+clickable_url = true
+
+dynamic_title = true
+
+search_wrap = true
+
+scroll_on_keystroke = true
+scroll_on_output = false
+
+urgent_on_bell = true
+
+scrollback_lines = -1
+
+cursor_blink = false
+
+[colors]
+foreground = #00cd00
+background = rgba(10, 10, 10, 0.8)
+cursor = #dcdccc
+cursor_foreground = #dcdccc
+
+color0 = #073642
+color1 = #bdb76b
+color2 = #859900
+color3 = #b58900
+color4 = #3465a4
+color5 = #d33682
+color6 = #2aa198
+color7 = #eee8d5
+color8 = #002b36
+color9 = #8b0000
+color10 = #00ff00
+color11 = #657b83
+color12 = #1e90ff
+color13 = #6c71c4
+color14 = #93a1a1
+color15 = #fdf6e3
+
